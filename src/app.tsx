@@ -3,6 +3,11 @@ import { AddNoteCard } from "./components/new-note-card";
 import { NoteCard } from "./components/note-card";
 import "./index.css";
 
+const note = {
+  date: new Date(),
+  content: "Primeiro conteudo, explicado.",
+};
+
 export function App() {
   return (
     <div className="max-w-6xl mx-auto my-12 space-y-6">
@@ -18,10 +23,8 @@ export function App() {
 
       <div className="grid grid-cols-3 gap-6 auto-rows-[250px]">
         <AddNoteCard />
-        <NoteCard />
-        <NoteCard />
-        <NoteCard />
-        <NoteCard />
+        <NoteCard note={note} />
+        <NoteCard note={{ date: new Date(), content: "Segundo conteudo" }} />
       </div>
     </div>
   );
