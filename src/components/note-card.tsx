@@ -1,4 +1,8 @@
 import * as Dialog from "@radix-ui/react-dialog";
+import { formatDistanceToNow } from "date-fns";
+import { pt } from "date-fns/locale";
+import { X } from "lucide-react";
+
 interface NoteCardProps {
   note: {
     date: Date;
@@ -20,13 +24,28 @@ export function NoteCard({ note }: NoteCardProps) {
 
       <Dialog.Portal>
         <Dialog.Overlay className="bg-black/60 inset-0 fixed" />
-        <Dialog.Content className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-w-[640px] w-full h-[60vh] bg-slate-700 rounded-md flex flex-col outline-none">
+        <Dialog.Content className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-w-[640px] w-full h-[60vh] bg-slate-700 rounded-md flex flex-col outline-none overflow-hidden">
+          <Dialog.Close className="absolute right-0 top-0 bg-slate-800 p-1.5 text-slate-400 hover:text-slate-100">
+            <X className="size-5" />
+          </Dialog.Close>
+
           <div className="flex flex-1 flex-col gap-3 p-5">
             <span className="text-sm font-medium text-slate-300">
-              {note.date.toISOString()}{" "}
+              {formatDistanceToNow(note.date, { locale: pt, addSuffix: true })}{" "}
             </span>
             <p className="text-slate-400 text-sm leading-6 ">{note.content}</p>
           </div>
+
+          <button
+            type="button"
+            className="bg-slate-800 py-4 text-sm text-slate-300 outline-none font-medium group"
+          >
+            Deseja{" "}
+            <span className="text-red-400 group-hover:underline group-focus:underline transition-all ">
+              apagar essa nota
+            </span>
+            ?
+          </button>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>
