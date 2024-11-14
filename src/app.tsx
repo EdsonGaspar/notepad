@@ -22,7 +22,7 @@ export function App() {
       <div className="h-px bg-slate-700"></div>
 
       <div className="grid grid-cols-3 gap-6 auto-rows-[250px]">
-        <AddNoteCard note={note} />
+        <AddNoteCard />
         <NoteCard note={note} />
         <NoteCard note={{ date: new Date(), content: "Segundo conteudo" }} />
       </div>

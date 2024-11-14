@@ -1,15 +1,18 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
 import { ChangeEvent, FormEvent, useState } from "react";
+import { toast } from "sonner";
 
 export function AddNoteCard() {
   const [shouldShowOnboard, setShouldShowOnboard] = useState(true);
+  const [content, setContent] = useState("");
 
   function handleOnboard() {
     setShouldShowOnboard(false);
   }
 
   const handleContentChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setContent(event.target.value);
     // console.log(event.target.value);
     if (event.target.value === "") {
       setShouldShowOnboard(true);
@@ -18,7 +21,10 @@ export function AddNoteCard() {
 
   function handleOnSaveText(event: FormEvent) {
     event.preventDefault();
-    console.log(`Foi clicado.`);
+    // console.log(`Foi clicado.`);
+    console.log(content);
+
+    toast.success("Nota salvo com sucesso.");
   }
 
   return (
