@@ -1,6 +1,6 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 export function AddNoteCard() {
   const [shouldShowOnboard, setShouldShowOnboard] = useState(true);
@@ -8,6 +8,13 @@ export function AddNoteCard() {
   function handleOnboard() {
     setShouldShowOnboard(false);
   }
+
+  const handleContentChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    // console.log(event.target.value);
+    if (event.target.value === "") {
+      setShouldShowOnboard(true);
+    }
+  };
 
   return (
     <Dialog.Root>
@@ -45,7 +52,13 @@ export function AddNoteCard() {
                 </button>
               </p>
             ) : (
-              <textarea cols={1} rows={6} className="w-full"></textarea>
+              <textarea
+                cols={1}
+                rows={6}
+                autoFocus
+                className="flex-1 text-sm leading-6 text-slate-400 bg-transparent resize-none outline-none"
+                onChange={handleContentChange}
+              ></textarea>
             )}
           </div>
 
