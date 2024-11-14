@@ -1,12 +1,19 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
+import { useState } from "react";
 
 export function AddNoteCard() {
+  const [shouldShowOnboard, setShouldShowOnboard] = useState(true);
+
+  function handleOnboard() {
+    setShouldShowOnboard(false);
+  }
+
   return (
     <Dialog.Root>
       <Dialog.Trigger className="bg-slate-700 rounded-md p-5 flex flex-col text-left gap-3 overflow-hidden hover:ring-2 hover: ring-slate-600 focus-visible:ring-2 focus-visible:ring-lime-400 outline-none">
         <span className="text-sm font-medium text-slate-200">
-          Adicionar nota{" "}
+          Adicionar nota
         </span>
         <p className="text-slate-400 text-sm leading-6 ">
           Grave uma nota em àudio que será convertida para texto automaticamente
@@ -23,16 +30,23 @@ export function AddNoteCard() {
             <span className="text-sm font-medium text-slate-300">
               Adicionar nota
             </span>
-            <p className="text-slate-400 text-sm leading-6 ">
-              Comece{" "}
-              <button className="font-medium text-lime-400 hover:underline ">
-                gravando uma nota
-              </button>{" "}
-              em audio ou se preferir{" "}
-              <button className="font-medium text-lime-400 hover:underline ">
-                utilize apenas texto
-              </button>
-            </p>
+            {shouldShowOnboard ? (
+              <p className="text-slate-400 text-sm leading-6 ">
+                Comece
+                <button className="font-medium text-lime-400 hover:underline ">
+                  gravando uma nota
+                </button>
+                em audio ou se preferir
+                <button
+                  onClick={handleOnboard}
+                  className="font-medium text-lime-400 hover:underline "
+                >
+                  utilize apenas texto
+                </button>
+              </p>
+            ) : (
+              <textarea cols={1} rows={6} className="w-full"></textarea>
+            )}
           </div>
 
           <button
