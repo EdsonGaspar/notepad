@@ -52,11 +52,11 @@ export function AddNoteCard() {
               </span>
               {shouldShowOnboard ? (
                 <p className="text-slate-400 text-sm leading-6 ">
-                  Comece
+                  Comece{" "}
                   <button className="font-medium text-lime-400 hover:underline ">
                     gravando uma nota
-                  </button>
-                  em audio ou se preferir
+                  </button>{" "}
+                  em audio ou se preferir{" "}
                   <button
                     onClick={handleOnboard}
                     className="font-medium text-lime-400 hover:underline "
