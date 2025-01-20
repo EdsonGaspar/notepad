@@ -47,6 +47,27 @@ export function App() {
     localStorage.setItem("note", JSON.stringify(notaDeleted));
   }
 
+  function onNoteUpdated(id: string, content: string) {
+    const notaUpdated = notas.map((nota) => {
+      if (nota.id === id) {
+        return { ...nota, content };
+      }
+      return nota;
+    });
+
+    setNotas(notaUpdated);
+
+    localStorage.setItem("note", JSON.stringify(notaUpdated));
+
+    console.log(notaUpdated);
+  }
+
+  // function editNote(id: string) {
+  //   const nota = notas.find((nota) => nota.id === id);
+
+  //   console.log(nota);
+  // }
+
   function handleSearch(event: ChangeEvent<HTMLInputElement>) {
     const query = event.target.value;
 
@@ -84,7 +105,12 @@ export function App() {
         <AddNoteCard onNoteCreated={onNoteCreated} />
         {filtereNotes.map((note) => {
           return (
-            <NoteCard key={note.id} note={note} onNoteDeleted={onNoteDeleted} />
+            <NoteCard
+              key={note.id}
+              note={note}
+              onNoteDeleted={onNoteDeleted}
+              onNoteUpdated={onNoteUpdated}
+            />
           );
         })}
       </div>

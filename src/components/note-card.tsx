@@ -1,7 +1,8 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { formatDistanceToNow } from "date-fns";
-import { id, pt } from "date-fns/locale";
+import { pt } from "date-fns/locale";
 import { X } from "lucide-react";
+import { useState } from "react";
 
 interface NoteCardProps {
   note: {
@@ -10,13 +11,21 @@ interface NoteCardProps {
     content: string;
   };
   onNoteDeleted: (id: string) => void;
+  onNoteUpdated: (id: string, content: string) => void;
 }
 
-export function NoteCard({ note, onNoteDeleted }: NoteCardProps) {
+export function NoteCard({
+  note,
+  onNoteDeleted,
+  onNoteUpdated,
+}: NoteCardProps) {
+  const [edit, setEdit] = useState(false);
+  const [content, setContent] = useState(note.content);
   return (
     <Dialog.Root>
       <Dialog.Trigger className="bg-slate-800 flex flex-col text-left rounded-md p-5 gap-3 outline-none overflow-hidden relative hover:ring-2 hover: ring-slate-600 focus-visible:ring-2 focus-visible:ring-lime-400 hover:scale-105 transition-all duration-300">
         <span className="text-sm font-medium text-slate-300">
+          Criado{" "}
           {formatDistanceToNow(note.date, { locale: pt, addSuffix: true })}{" "}
         </span>
         <p className="text-slate-400 text-sm leading-6 ">{note.content}</p>
@@ -35,8 +44,40 @@ export function NoteCard({ note, onNoteDeleted }: NoteCardProps) {
             <span className="text-sm font-medium text-slate-300">
               {formatDistanceToNow(note.date, { locale: pt, addSuffix: true })}{" "}
             </span>
-            <p className="text-slate-400 text-sm leading-6 ">{note.content}</p>
+
+            {!edit && (
+              <p className="text-slate-400 text-sm leading-6 ">
+                {note.content}
+              </p>
+            )}
+            {edit && (
+              <textarea
+                className="bg-transparent border-none outline-none text-slate-400 w-full h-full"
+                onChange={(evt) => setContent(evt.target.value)}
+              >
+                {content}
+              </textarea>
+            )}
           </div>
+
+          <button
+            type="button"
+            onClick={() => {
+              if (edit) {
+                setEdit(false);
+                onNoteUpdated(note.id, content);
+              } else {
+                setEdit(true);
+              }
+            }}
+            className="bg-slate-800 py-4 text-sm text-slate-300 outline-none font-medium group"
+          >
+            Deseja{" "}
+            <span className="text-white group-hover:underline group-focus:underline transition-all ">
+              {edit ? "Salvar" : "Editar essa nota"}
+            </span>
+            ?
+          </button>
 
           <button
             type="button"
