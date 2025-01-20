@@ -55,9 +55,9 @@ export function App() {
       : notas;
 
   return (
-    <div className="max-w-6xl mx-auto my-12 space-y-6">
+    <div className="max-w-6xl mx-auto my-12 space-y-6 px-5 lg:px-0">
       {/* <img src={logo} alt="NLW Expert logo" /> */}
-      <p className="text-2xl text-center text-slate-400 font-bold py-2 px-4 tracking-tight cursor-pointer hover:text-slate-200 transition-all hover:rounded-lg w-40 absolute top-5 right-5 hover:scale-105 duration-300">
+      <p className="text-2xl text-center text-slate-400 font-bold py-2 px-4 tracking-tight cursor-pointer hover:text-slate-200 transition-all hover:rounded-lg w-40 absolute top-5 right-5 hover:scale-105 duration-300 ">
         <span>NoteFast</span>
       </p>
       <form className="w-full">
@@ -70,7 +70,7 @@ export function App() {
       </form>
       <div className="h-px bg-slate-700"></div>
 
-      <div className="grid grid-cols-3 gap-6 auto-rows-[250px]">
+      <div className="grid grid-cols-1 md:grid-cols-2 md:px-5 lg:grid-cols-3 gap-6 auto-rows-[250px]">
         <AddNoteCard onNoteCreated={onNoteCreated} />
         {filtereNotes.map((note) => {
           return <NoteCard key={note.id} note={note} />;
