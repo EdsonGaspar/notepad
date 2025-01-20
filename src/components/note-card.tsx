@@ -1,16 +1,18 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { formatDistanceToNow } from "date-fns";
-import { pt } from "date-fns/locale";
+import { id, pt } from "date-fns/locale";
 import { X } from "lucide-react";
 
 interface NoteCardProps {
   note: {
+    id: string;
     date: Date;
     content: string;
   };
+  onNoteDeleted: (id: string) => void;
 }
 
-export function NoteCard({ note }: NoteCardProps) {
+export function NoteCard({ note, onNoteDeleted }: NoteCardProps) {
   return (
     <Dialog.Root>
       <Dialog.Trigger className="bg-slate-800 flex flex-col text-left rounded-md p-5 gap-3 outline-none overflow-hidden relative hover:ring-2 hover: ring-slate-600 focus-visible:ring-2 focus-visible:ring-lime-400 hover:scale-105 transition-all duration-300">
@@ -38,6 +40,7 @@ export function NoteCard({ note }: NoteCardProps) {
 
           <button
             type="button"
+            onClick={() => onNoteDeleted(note.id)}
             className="bg-slate-800 py-4 text-sm text-slate-300 outline-none font-medium group"
           >
             Deseja{" "}
