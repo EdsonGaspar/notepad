@@ -2,7 +2,6 @@ import { ChangeEvent, useState } from "react";
 // import logo from "./assets/logo-nlw-expert.svg";
 import { AddNoteCard } from "./new-note-card";
 import { NoteCard } from "./note-card";
-import "./index.css";
 
 // const K = {
 //   date: new Date(),

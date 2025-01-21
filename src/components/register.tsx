@@ -33,7 +33,7 @@ const Register: React.FC<{ onRegisterSuccess: () => void }> = ({
     <div className="flex items-center justify-center min-h-screen bg-slate-100">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <h2 className="text-2xl font-bold text-slate-800 mb-6">Registrar</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4 text-slate-800">
           <input
             type="text"
             name="name"
