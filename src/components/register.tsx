@@ -30,34 +30,46 @@ const Register: React.FC<{ onRegisterSuccess: () => void }> = ({
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Registrar</h2>
-      <input
-        type="text"
-        name="name"
-        placeholder="Nome"
-        value={form.name}
-        onChange={handleChange}
-        required
-      />
-      <input
-        type="email"
-        name="email"
-        placeholder="Email"
-        value={form.email}
-        onChange={handleChange}
-        required
-      />
-      <input
-        type="password"
-        name="password"
-        placeholder="Senha"
-        value={form.password}
-        onChange={handleChange}
-        required
-      />
-      <button type="submit">Registrar</button>
-    </form>
+    <div className="flex items-center justify-center min-h-screen bg-slate-100">
+      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <h2 className="text-2xl font-bold text-slate-800 mb-6">Registrar</h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <input
+            type="text"
+            name="name"
+            placeholder="Insira seu nome"
+            value={form.name}
+            onChange={handleChange}
+            required
+            className="w-full border border-slate-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-slate-500"
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Insira seu email"
+            value={form.email}
+            onChange={handleChange}
+            required
+            className="w-full border border-slate-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-slate-500"
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Inisra sua senha"
+            value={form.password}
+            onChange={handleChange}
+            required
+            className="w-full border border-slate-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-slate-500"
+          />
+          <button
+            type="submit"
+            className="w-full bg-slate-800 text-white py-2 px-4 rounded-md hover:bg-slate-700"
+          >
+            Registrar
+          </button>
+        </form>
+      </div>
+    </div>
   );
 };
 
